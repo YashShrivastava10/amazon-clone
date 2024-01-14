@@ -8,6 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        white: "#FFFF",
+        black: "#111111",
+        lightBlue: "#F7FAFA",
+        silver: "#D5D9D9",
+        grey: "#767676",
+        yellow: "#FFD814",
+      },
+      fontSize:{
+        "11": "11px",
+        "12": "12px",
+        "13": "13px",
+        "3xl": "28px"
+      }
     },
   },
   plugins: [],

@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+  a{
+    @apply text-[#0066c0] no-underline hover:text-amber-500  hover:underline cursor-pointer
+  }
+}
+
+.labelInput{
+  @apply flex flex-col w-full
+}
+.labelInput label{
+  @apply font-bold text-13
+}
+.labelInput input{
+  @apply border border-[#a6a6a6] rounded 
+  h-[30px] 
+  pl-2 
+  text-13 
+  outline-none outline-offset-1 
+  focus:outline-[#c8f3fa] focus:ring focus:bg-[#f7feff]
+}
+.labelInput input::placeholder{
+  @apply text-13
+}
