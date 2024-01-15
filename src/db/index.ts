@@ -30,8 +30,8 @@ export const connectDB = async() => {
   return client.db(dbName);
 }
 
-// export const collectionData = async (name) => {
-//   const data = await connectDB()
-//   const collection = data.collection(name)
-//   return await collection.find().toArray()
-// }
+export const collectionData = async (name: string) => {
+  const data = await connectDB()
+  const collection = data.collection(name)
+  return await collection.find().toArray()
+}
