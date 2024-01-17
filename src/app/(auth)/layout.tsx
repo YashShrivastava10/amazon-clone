@@ -21,7 +21,7 @@ export default function AuthRootLayout({
       <ReduxProvider>
       <body className='
       bg-white text-black
-      h-screen min-w-screen min-h-screen 
+      min-w-screen min-h-screen 
       flex flex-col items-center gap-6
       relative'>
         <div className='flex-1 w-[360px] pt-2'>

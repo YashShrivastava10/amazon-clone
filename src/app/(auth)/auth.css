@@ -9,7 +9,7 @@
 }
 
 .labelInput{
-  @apply flex flex-col w-full
+  @apply flex flex-col w-full gap-1
 }
 .labelInput label{
   @apply font-bold text-13

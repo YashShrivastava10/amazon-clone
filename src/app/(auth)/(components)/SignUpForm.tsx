@@ -21,9 +21,10 @@ const SignUpForm = () => {
           dispatch(setUser(response.data))
           redirect("/")
         }
+        else console.log(response.message)
       }
       else{
-        console.log("Wrong");
+        console.log("Password do not match");
       }
     }} className='border border-silver rounded-lg flex flex-col justify-start items-start gap-4 px-5 py-4 w-full'>
       <div>

@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   const currentYear = new Date().getFullYear()
   return (
-    <footer className='flex flex-col min-h-[100px] w-full justify-center items-center relative'>
+    <footer className='flex flex-col min-h-[100px] max-h-full w-full justify-center items-center relative'>
       <hr className='w-full h-[1px] absolute inset-0'/>
       <div className='w-[360px] flex flex-col justify-center items-center h-full gap-2'>
         <div className='w-3/4 flex justify-evenly text-11'>
