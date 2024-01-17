@@ -15,11 +15,13 @@ const config: Config = {
         silver: "#D5D9D9",
         grey: "#767676",
         yellow: "#FFD814",
+        red: "#cc0c39",
       },
       fontSize:{
         "11": "11px",
         "12": "12px",
         "13": "13px",
+        "17": "17px",
         "3xl": "28px"
       }
     },

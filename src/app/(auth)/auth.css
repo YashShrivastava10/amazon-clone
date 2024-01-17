@@ -15,13 +15,19 @@
   @apply font-bold text-13
 }
 .labelInput input{
-  @apply border border-[#a6a6a6] rounded 
+  @apply rounded 
   h-[30px] 
   pl-2 
   text-13 
-  outline-none outline-offset-1 
+}
+.inputField{
+  @apply border border-[#a6a6a6] outline-none outline-offset-1
   focus:outline-[#c8f3fa] focus:ring focus:bg-[#f7feff]
 }
 .labelInput input::placeholder{
   @apply text-13
+}
+.error{
+  @apply border-2 border-red outline-none outline-offset-0
+  focus:outline-[#ffe3e3] focus:bg-transparent
 }

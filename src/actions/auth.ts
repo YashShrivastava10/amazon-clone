@@ -97,11 +97,11 @@ export const signin = async (password: string, email: string) => {
   
     // If user do not exist
     if (!user)
-      return createResponse({ success: false, message: "Email Id do not exist", data: {} })
+      return createResponse({ success: false, message: "We cannot find an account with that email address", data: {} })
   
     // If user exist but password do no match
     else if (!await verifyPassword(password, user.password))
-      return createResponse({ success: false, message: "Incorrect Password", data: {} })
+      return createResponse({ success: false, message: "Your password is incorrect", data: {} })
   
     // else generate a token, set that in cookie and return true along with data 
     else {
@@ -129,8 +129,7 @@ export const signin = async (password: string, email: string) => {
 }
 
 export const checkUser = async (email: string) => {
-  const collection = (await connection).collection("user")
-  const user = await collection.findOne({ email })
+  const { user, collection } = await fetchUser(email)
   if(user) return true
   return false
 }
