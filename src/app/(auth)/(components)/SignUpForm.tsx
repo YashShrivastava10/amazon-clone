@@ -1,28 +1,37 @@
 "use client";
 
+import { signup } from '@/actions/auth'
+import { setUser } from '@/store/slice/userSlice';
 import Link from 'next/link'
-import React, { FormEvent, useEffect } from 'react'
+import { redirect } from 'next/navigation';
+import React from 'react'
+import { useDispatch } from 'react-redux';
 
 const SignUpForm = () => {
 
-  useEffect(() => {
-    const name = document.getElementById("name")
-    name?.focus()
-  }, [])
-
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    const formData = Object.fromEntries(new FormData(e.target as HTMLFormElement))
-  }
+  const dispatch = useDispatch()
 
   return (
-    <form onSubmit={onSubmit} className='border border-silver rounded-lg flex flex-col justify-start items-start gap-4 px-5 py-4 w-full'>
+    <form action={async formData => {
+      const password = formData.get("password")
+      const rePassword = formData.get("rePassword")
+      if(password === rePassword){
+        const response = await signup(formData)
+        if(response.success){
+          dispatch(setUser(response.data))
+          redirect("/")
+        }
+      }
+      else{
+        console.log("Wrong");
+      }
+    }} className='border border-silver rounded-lg flex flex-col justify-start items-start gap-4 px-5 py-4 w-full'>
       <div>
         <span className='text-3xl'>Create account</span>
       </div>
       <div className='labelInput'>
         <label htmlFor='name'>Your Name</label>
-        <input id="name" name="name" placeholder="First and last name" required/>
+        <input id="name" name="name" placeholder="First and last name" required autoFocus/>
       </div>
       <div className='labelInput'>
         <label htmlFor='email'>Mobile number or email</label>

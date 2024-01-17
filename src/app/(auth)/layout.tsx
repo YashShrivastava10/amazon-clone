@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import "./auth.css"
 import Footer from './(components)/Footer'
+import ReduxProvider from '../ReduxProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +18,7 @@ export default function AuthRootLayout({
 }) {
   return (
     <html lang="en">
+      <ReduxProvider>
       <body className='
       bg-white text-black
       h-screen min-w-screen min-h-screen 
@@ -27,6 +29,7 @@ export default function AuthRootLayout({
         </div>
         <Footer />
       </body>
+      </ReduxProvider>
     </html>
   )
 }
