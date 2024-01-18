@@ -1,6 +1,6 @@
 import React from 'react'
-import NewToAmazon from '../NewToAmazon'
-import CreateAccButton from '../CreateAccButton'
+import NewToAmazon from './NewToAmazon'
+import CreateAccButton from './CreateAccButton'
 
 const CreateAccountButton = () => {
   return (

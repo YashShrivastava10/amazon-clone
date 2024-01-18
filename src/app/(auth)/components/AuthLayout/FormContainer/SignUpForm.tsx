@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { ErrorType } from './SignInForm';
 import Error from '../ErrorContainer/Error';
 import Image from 'next/image';
-import info from "../../../../public/info.png"
+import info from "../../../../../../public/info.png"
 
 const SignUpForm = () => {
 

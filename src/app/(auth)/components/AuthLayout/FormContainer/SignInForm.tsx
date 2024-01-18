@@ -5,7 +5,7 @@ import { setUser } from '@/store/slice/userSlice';
 import { redirect } from 'next/navigation';
 import React, { FormEvent, ReactElement, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import FieldError from '../FieldError';
+import FieldError from '../ErrorContainer/FieldError';
 import Error from '../ErrorContainer/Error';
 
 export type ErrorType = {
