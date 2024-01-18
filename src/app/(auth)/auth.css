@@ -31,3 +31,10 @@
   @apply border-2 border-red outline-none outline-offset-0
   focus:outline-[#ffe3e3] focus:bg-transparent
 }
+.authBtn{
+  @apply w-full bg-yellow rounded-md h-[28px] text-13 shadow-md hover:bg-[#F7CA00] 
+  outline outline-2 outline-transparent outline-offset-0
+  focus:outline-[#c8f3fa] focus:outline-offset-[3px] focus:ring-1 focus:ring-offset-2 focus:ring-[#008296]
+  active:bg-[#f0b800]
+  active:outline-[#c8f3fa] active:outline-offset-[3px] active:ring-1 active:ring-offset-2 active:ring-[#008296]
+}
