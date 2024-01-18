@@ -4,6 +4,8 @@ import { connectDB } from "@/db"
 import { encrypt, verifyPassword } from "@/utils/hash"
 import { cookies } from "next/headers"
 import jwt from "jsonwebtoken"
+import { Resend } from "resend"
+import { EmailTemplate } from "@/app/(auth)/components/AuthLayout/FormContainer/EmailTemplate"
 
 type User = {
   name: string,
@@ -14,7 +16,7 @@ type User = {
   loggedOut: null,
 }
 
-type SignUpFormData = {
+export type SignUpFormData = {
   name: string,
   email: string,
   password: string,
@@ -132,4 +134,26 @@ export const checkUser = async (email: string) => {
   const { user, collection } = await fetchUser(email)
   if(user) return true
   return false
+}
+
+export const sendEmail = async(email: string) => {
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  try{
+    const {data, error} = await resend.emails.send({
+      from: 'Amazon-Clone.com <onboarding@resend.dev>',
+      to: email,
+      subject: 'Amazon password assistance',
+      react: EmailTemplate({ otp: generateOTP() }) as React.ReactElement,
+    });
+    if(data) return data
+    return error
+  }
+  catch(error){
+    return error
+  }
+}
+
+const generateOTP = () => {
+  return Math.floor(100000 + Math.random() * 900000)
 }
