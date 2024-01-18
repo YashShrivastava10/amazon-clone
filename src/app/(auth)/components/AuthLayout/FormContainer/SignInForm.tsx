@@ -3,12 +3,10 @@
 import { checkUser, signin } from '@/actions/auth';
 import { setUser } from '@/store/slice/userSlice';
 import { redirect } from 'next/navigation';
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, ReactElement, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import info from "../../../../public/info.png"
-import Image from 'next/image';
-import FieldError from './(AuthLayout)/FieldError';
-import Error from './(AuthLayout)/Error';
+import FieldError from '../FieldError';
+import Error from '../ErrorContainer/Error';
 
 export type ErrorType = {
   status: boolean,
@@ -16,7 +14,7 @@ export type ErrorType = {
   message: string,
 }
 
-const SignInForm = () => {
+const SignInForm = ({children}: {children : ReactElement}) => {
 
   const dispatch = useDispatch()
 
@@ -78,6 +76,7 @@ const SignInForm = () => {
             <a className='text-13'>Forget Paswword</a>
           </div>
         </form>
+        {show === "email" && children }
       </div>
     )
   }

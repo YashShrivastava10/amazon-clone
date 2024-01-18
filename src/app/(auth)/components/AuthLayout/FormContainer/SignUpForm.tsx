@@ -7,7 +7,9 @@ import { redirect } from 'next/navigation';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { ErrorType } from './SignInForm';
-import Error from './(AuthLayout)/Error';
+import Error from '../ErrorContainer/Error';
+import Image from 'next/image';
+import info from "../../../../public/info.png"
 
 const SignUpForm = () => {
 
@@ -51,6 +53,10 @@ const SignUpForm = () => {
         <div className='labelInput'>
           <label htmlFor='password'>Password</label>
           <input id="password" name="password" type="password" className={`${(error.status && error.type === 1) ? 'error' : 'inputField'}`} placeholder="At least 6 characters" required />
+          <div className='flex items-center gap-1'>
+            <Image src={info} alt="" height={15} width={15} />
+            <span className='text-12'>Passwords must be at least 6 characters.</span>
+          </div>
         </div>
         <div className='labelInput'>
           <label htmlFor='rePassword'>Re-enter Password</label>
