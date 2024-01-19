@@ -41,9 +41,10 @@ const secretKey = process.env.JWT_SECRET_KEY
 
 if(!secretKey) throw new Error("JWT Secret Key is not valid")
 
-const setCookie = (email: string) => {
-  const token = jwt.sign({ email }, secretKey, { expiresIn: '6h' });
-  cookies().set("authToken", token);
+const setCookie = (email: string, status: boolean = false) => {
+  const maxAge = status ? 15 * 24 * 60 * 60 : 24 * 60 * 60
+  const token = jwt.sign({ email }, secretKey);
+  cookies().set("authToken", token, {secure: true, httpOnly: true, maxAge});
 }
 
 const getSerializedUserInfo = (data: object, user: User) => {
@@ -66,7 +67,7 @@ export const signup = async (formData: FormData) => {
     const { user, collection } = await fetchUser(email);
 
     // Hash the password
-    const hashedPassword = await encrypt(password);
+    const hashedPassword: string = await encrypt(password);
 
     const userInfo: User = {
       name: name,
@@ -87,7 +88,7 @@ export const signup = async (formData: FormData) => {
 
     if (result.acknowledged) {
       
-      setCookie(email)
+      setCookie(email, true)
 
       const { password, ...data } = userInfo;
       const serializedUserInfo = getSerializedUserInfo(data, userInfo)
@@ -103,7 +104,7 @@ export const signup = async (formData: FormData) => {
   }
 };
 
-export const signin = async (password: string, email: string) => {
+export const signin = async (password: string, email: string, status: boolean) => {
 
   try{
     // Fetch user
@@ -124,7 +125,7 @@ export const signin = async (password: string, email: string) => {
       if (!result.acknowledged)
         return createResponse({ success: false, message: "Not Signed in", data: {} })
   
-        setCookie(email)
+        setCookie(email, status)
   
       const {_id, password, ...data } = typedUser
       const serializedUserInfo = getSerializedUserInfo(data, typedUser)
@@ -175,9 +176,10 @@ export const changePassword = async(email: string, password: string) => {
 
   const typeUser = user as User
 
-  const response = await collection.updateOne({ email }, {$set: {password}})
+  const hashPassword: string = await encrypt(password)
+  const response = await collection.updateOne({ email }, {$set: {password: hashPassword}})
   if(response.acknowledged){
-    setCookie(email)
+    setCookie(email, true)
     const {_id, password, ...data } = typeUser
     const serializedUserInfo = getSerializedUserInfo(data, typeUser)
     return createResponse({ success: true, message: "Signed in", data: serializedUserInfo })
