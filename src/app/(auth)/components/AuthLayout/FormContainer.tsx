@@ -3,6 +3,7 @@ import SignUpForm from './FormContainer/SignUpForm'
 import SignInForm from './FormContainer/SignInForm'
 import CreateAccountButton from './FormContainer/CreateAccountButton'
 import ForgetPassword from './FormContainer/ForgetPassword'
+import SecurePasswordTip from './FormContainer/SecurePasswordTip'
 
 const FormContainer = ({ status }: { status: string }) => {
   return (
@@ -13,7 +14,7 @@ const FormContainer = ({ status }: { status: string }) => {
         </SignInForm>
       }
       {status === "signup" && <SignUpForm />}
-      {status === "forgetPassword" && <ForgetPassword />}
+      {status === "forgetPassword" && <ForgetPassword><SecurePasswordTip /></ForgetPassword>}
     </div>
   )
 }

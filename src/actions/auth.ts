@@ -171,8 +171,7 @@ const generateOTP = () => {
 export const changePassword = async(email: string, password: string) => {
   const {user, collection} = await fetchUser(email)
 
-  console.log(user);
-  if(!user) createResponse({ success: false, message: "Failed", data: {} })
+  if(!user) return createResponse({ success: false, message: "Failed", data: {} })
 
   const typeUser = user as User
 
