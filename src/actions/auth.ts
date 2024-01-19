@@ -6,8 +6,10 @@ import { cookies } from "next/headers"
 import jwt from "jsonwebtoken"
 import { Resend } from "resend"
 import { EmailTemplate } from "@/app/(auth)/components/AuthLayout/FormContainer/EmailTemplate"
+import { ObjectId } from "mongodb"
 
 type User = {
+  _id?: ObjectId,
   name: string,
   email: string,
   password: string,
@@ -38,6 +40,20 @@ const fetchUser = async (email: string) => {
 const secretKey = process.env.JWT_SECRET_KEY
 
 if(!secretKey) throw new Error("JWT Secret Key is not valid")
+
+const setCookie = (email: string) => {
+  const token = jwt.sign({ email }, secretKey, { expiresIn: '6h' });
+  cookies().set("authToken", token);
+}
+
+const getSerializedUserInfo = (data: object, user: User) => {
+  const serializedUserInfo = {
+    ...data,
+    createDate: user.createDate.toISOString(),
+    loggedIn: user.loggedIn.toISOString(),
+  };
+  return serializedUserInfo
+}
 
 export const signup = async (formData: FormData) => {
   try {
@@ -70,16 +86,12 @@ export const signup = async (formData: FormData) => {
     const result = await collection.insertOne({ ...userInfo });
 
     if (result.acknowledged) {
-      const token = jwt.sign({ email }, secretKey, { expiresIn: '6h' });
-      cookies().set("authToken", token);
+      
+      setCookie(email)
 
       const { password, ...data } = userInfo;
-      const serializedUserInfo = {
-        ...data,
-        createDate: userInfo.createDate.toISOString(),
-        loggedIn: userInfo.loggedIn.toISOString(),
-      };
-
+      const serializedUserInfo = getSerializedUserInfo(data, userInfo)
+  
       return createResponse({ success: true, message: "Created", data: serializedUserInfo });
     } else {
       return createResponse({ success: false, message: "Not Created", data: { message: "Hello" } });
@@ -107,19 +119,16 @@ export const signin = async (password: string, email: string) => {
   
     // else generate a token, set that in cookie and return true along with data 
     else {
+      const typedUser = user as User
       const result = await collection.updateOne({ email }, { $set: { loggedIn: new Date() } })
       if (!result.acknowledged)
         return createResponse({ success: false, message: "Not Signed in", data: {} })
   
-      const token = jwt.sign({ email }, secretKey, { expiresIn: '6h' })
-      cookies().set("authToken", token)
+        setCookie(email)
   
-      const {_id, password, ...data } = user
-      const serializedUserInfo = {
-        ...data,
-        createDate: user.createDate.toISOString(),
-        loggedIn: user.loggedIn.toISOString(),
-      };
+      const {_id, password, ...data } = typedUser
+      const serializedUserInfo = getSerializedUserInfo(data, typedUser)
+
       return createResponse({ success: true, message: "Signed in", data: serializedUserInfo })
     }
   }
@@ -140,14 +149,15 @@ export const sendEmail = async(email: string) => {
 
   const resend = new Resend(process.env.RESEND_API_KEY);
   try{
+    const otp = generateOTP()
     const {data, error} = await resend.emails.send({
       from: 'Amazon-Clone.com <onboarding@resend.dev>',
       to: email,
       subject: 'Amazon password assistance',
-      react: EmailTemplate({ otp: generateOTP() }) as React.ReactElement,
+      react: EmailTemplate({ otp }) as React.ReactElement,
     });
-    if(data) return data
-    return error
+    if(data) return {data, otp}
+    return {data, error, otp}
   }
   catch(error){
     return error
@@ -156,4 +166,22 @@ export const sendEmail = async(email: string) => {
 
 const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000)
+}
+
+export const changePassword = async(email: string, password: string) => {
+  const {user, collection} = await fetchUser(email)
+
+  console.log(user);
+  if(!user) createResponse({ success: false, message: "Failed", data: {} })
+
+  const typeUser = user as User
+
+  const response = await collection.updateOne({ email }, {$set: {password}})
+  if(response.acknowledged){
+    setCookie(email)
+    const {_id, password, ...data } = typeUser
+    const serializedUserInfo = getSerializedUserInfo(data, typeUser)
+    return createResponse({ success: true, message: "Signed in", data: serializedUserInfo })
+  }
+  return createResponse({ success: false, message: "Failed", data: {} })
 }

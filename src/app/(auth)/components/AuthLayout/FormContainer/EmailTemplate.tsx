@@ -29,10 +29,11 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
       <Body>
       <Tailwind>
         <Container className='w-[450px]'>
-          <Section className='flex justify-between items-center'>
+          <Section>
+            <Row>
             <Column>
               <Img
-                src="../../../../../../public/amazon-logo.jpg"
+                src="/public/static/amazon-logo.jpg"
                 width="100"
                 height="100"
                 alt="Amazon"
@@ -40,30 +41,31 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             </Column>
 
             <Column>
-              <Text>Password Assistance</Text>
+              <Text className='text-black text-[22px]'>Password Assistance</Text>
             </Column>
+            </Row>
           </Section>
 
           <Section className='w-full'>
             <Hr className='w-full'/>
           </Section>
 
-          <Section className='flex justify-start'>
-            <Text className='text-[red]'>
+          <Section>
+            <Text className='text-[#500050]'>
               To authenticate, please use the following One Time Password (OTP):
             </Text>
           </Section>
 
           <Section>
-            <Text>{otp}</Text>
+            <Text className='text-[17px] font-bold'>{otp}</Text>
           </Section>
 
           <Section>
-            <Text>Don&apos;t share this OTP with anyone. Our customer service team will never ask you for your password, OTP, credit card, or banking info.</Text>
+            <Text className='text-black'>Don&apos;t share this OTP with anyone. Our customer service team will never ask you for your password, OTP, credit card, or banking info.</Text>
           </Section>
 
           <Section>
-            <Text>We hope to see you again soon.</Text>
+            <Text className='text-black'>We hope to see you again soon.</Text>
           </Section>
 
         </Container>
