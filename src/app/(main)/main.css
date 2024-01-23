@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navbar-section{
+  @apply flex justify-center 
+  border-[1px] border-transparent h-full
+  px-2 
+  hover:border-white
+  cursor-pointer
+}
+
+select{
+  @apply border-2 focus:border-[#f08804]
+}
