@@ -19,7 +19,7 @@ export default function MainLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className='h-screen w-screen'>
         <ReduxProvider>
           <Header />
           {children}
