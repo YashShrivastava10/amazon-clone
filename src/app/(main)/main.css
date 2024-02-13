@@ -9,7 +9,9 @@
   hover:border-white
   cursor-pointer
 }
-
-select{
-  @apply border-2 focus:border-[#f08804]
+.arrow{
+  @apply w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-t-[4px] border-r-transparent  border-solid border-t-[#555]
+}
+input{
+  @apply outline-none border-none
 }
