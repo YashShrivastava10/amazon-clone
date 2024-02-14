@@ -5,8 +5,8 @@ import { encrypt, verifyPassword } from "@/utils/hash"
 import { cookies } from "next/headers"
 import jwt from "jsonwebtoken"
 import { Resend } from "resend"
-import { EmailTemplate } from "@/app/(auth)/components/AuthLayout/FormContainer/EmailTemplate"
 import { ObjectId } from "mongodb"
+import { EmailTemplate } from "@/components/auth/AuthLayout/FormContainer/EmailTemplate"
 
 type User = {
   _id?: ObjectId,

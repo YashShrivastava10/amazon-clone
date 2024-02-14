@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import amazonLogo from "../../../../../public/static/amazon-logo.jpg"
+import amazonLogo from "../../../../public/static/amazon-logo.jpg"
 import Link from 'next/link';
 
 const ImageContainer = () => {

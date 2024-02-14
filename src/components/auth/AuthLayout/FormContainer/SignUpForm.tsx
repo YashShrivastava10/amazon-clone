@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { ErrorType } from './SignInForm';
 import Image from 'next/image';
-import info from "../../../../../../public/info.png"
+import info from "../../../../../public/info.png"
 import FieldError from '../ErrorContainer/FieldError';
 
 type Field = {

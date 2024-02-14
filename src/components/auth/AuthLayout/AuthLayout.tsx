@@ -1,6 +1,7 @@
 import React from 'react'
-import ImageContainer from './AuthLayout/ImageContainer'
-import FormContainer from './AuthLayout/FormContainer'
+import ImageContainer from './ImageContainer'
+import FormContainer from './FormContainer'
+
 
 const AuthLayout = ({ status }: { status: string }) => {
   return (
