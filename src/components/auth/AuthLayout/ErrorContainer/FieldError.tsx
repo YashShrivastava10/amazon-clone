@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import errorImg from "../../../../../public/error.png"
+import errorImg from "@public/error.png"
 
 const FieldError: React.FC<{message: string}> = ({message}) => {
   return (

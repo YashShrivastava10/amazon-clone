@@ -1,13 +1,14 @@
 "use client"
 
-import { checkUser, sendEmail, changePassword } from '@/actions/auth'
 import React, { ReactElement, useState } from 'react'
-import { ErrorType } from './SignInForm';
+import { ErrorType } from '../SignInForm/SignInForm';
 import { redirect } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/store/slice/userSlice';
-import FieldError from '../ErrorContainer/FieldError';
-import Error from '../ErrorContainer/Error';
+import FieldError from '../../ErrorContainer/FieldError';
+import Error from '../../ErrorContainer/Error';
+import { changePassword, checkUser } from '@/actions/auth/auth';
+import { sendEmail } from '@/actions/auth/email';
 
 type Detail = {
   heading: string,

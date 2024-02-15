@@ -1,20 +1,11 @@
 import React from 'react'
-import SignUpForm from './FormContainer/SignUpForm'
-import SignInForm from './FormContainer/SignInForm'
-import CreateAccountButton from './FormContainer/CreateAccountButton'
-import ForgetPassword from './FormContainer/ForgetPassword'
-import SecurePasswordTip from './FormContainer/SecurePasswordTip'
+import ShowForm from './ShowFrom/ShowForm'
+import { FormStatusType } from '@/types/Form'
 
-const FormContainer = ({ status }: { status: string }) => {
+const FormContainer = ({ status }: { status: FormStatusType }) => {
   return (
     <div className='w-full'>
-      {status === "signin" &&
-        <SignInForm>
-          <CreateAccountButton />
-        </SignInForm>
-      }
-      {status === "signup" && <SignUpForm />}
-      {status === "forgetPassword" && <ForgetPassword><SecurePasswordTip /></ForgetPassword>}
+      <ShowForm status={status}/>
     </div>
   )
 }
