@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import danger from "../../../../../../public/danger.png"
+import danger from "@public/danger.png"
 
 const Error: React.FC<{message: string}> = ({message}) => {
   return (

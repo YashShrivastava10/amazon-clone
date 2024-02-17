@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthLayout from '../../components/AuthLayout'
+import AuthLayout from '@/components/auth/AuthLayout/AuthLayout'
 
 const ForgetPassword = () => {
   return <AuthLayout status="forgetPassword" />

@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import React from 'react'
-import amazon from "../../public/amazon.png"
+import amazon from "@public/amazon.png"
 import { MapPin, Search, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 
