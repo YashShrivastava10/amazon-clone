@@ -3,7 +3,7 @@
 import { setUser } from '@/store/slice/userSlice';
 import { redirect } from 'next/navigation';
 import React, { FormEvent, ReactElement, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FieldError from '../../ErrorContainer/FieldError';
 import Error from '../../ErrorContainer/Error';
 import { useFormStatus } from 'react-dom';
@@ -87,7 +87,8 @@ const SignInForm = ({ children }: { children: ReactElement }) => {
     if (password.trim() !== "") {
       const response = await signin(password, email!, checked)
       if (response.success) {
-        dispatch(setUser(response.data))
+        console.log(response.data);
+        dispatch(setUser({...response.data}))
         redirect("/")
       }
       else {

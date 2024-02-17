@@ -18,3 +18,16 @@ input{
 li{
   @apply list-none
 }
+.authBtn{
+  @apply w-full bg-yellow rounded-md h-[28px] text-13 text-black shadow-md hover:bg-[#F7CA00] 
+  outline outline-2 outline-transparent outline-offset-0
+  focus:outline-[#c8f3fa] focus:outline-offset-[3px] focus:ring-1 focus:ring-offset-2 focus:ring-[#008296]
+  active:bg-[#f0b800]
+  active:outline-[#c8f3fa] active:outline-offset-[3px] active:ring-1 active:ring-offset-2 active:ring-[#008296]
+}
+.hover-div{
+  @apply absolute bg-white hidden flex-col gap-2 w-[200px] p-4 rounded-lg top-[100%] -left-[50%]
+}
+.navbar-section:hover .hover-div{
+  display: flex;
+}

@@ -1,12 +1,27 @@
 "use client";
 
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 import amazon from "@public/amazon.png"
 import { MapPin, Search, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux';
+import { checkAuthCookie } from '@/utils/auth';
+import { setUser } from '@/store/slice/userSlice';
+import { RootState } from '@/types/Slice';
 
 const Header = () => {
+
+  const dispatch = useDispatch()
+  const { user } = useSelector((state: RootState) => state.user)
+
+  useEffect(() => {
+    const fetchCookie = async() => {
+      if(!await checkAuthCookie())
+        dispatch(setUser({}))
+    }
+    fetchCookie()
+  }, [])
 
   const showBorder = (id: string) => {
     if(id === "all"){
@@ -26,6 +41,8 @@ const Header = () => {
     if(!elem) return
     elem.style.border = "3px solid #febd69"
   }
+
+  const name = Object.keys(user).length > 0 ? user.name : "sign in"
 
   return (
     <div className='w-full h-[60px] 
@@ -77,9 +94,13 @@ const Header = () => {
         <span>EN</span>
       </div>
 
-      <div className='navbar-section flex-col gap-0'>
-        <span className='text-12'>Hello, sign in</span>
+      <div className='navbar-section flex-col relative'>
+        <span className='text-12'>Hello, {name}</span>
         <b className='text-14 -mt-1'>Account & Lists</b>
+        <div className='hover-div'>
+          <Link href="/signin" className='authBtn flex items-center justify-center'>Sign in</Link>
+          <span className='text-black text-12 flex justify-center gap-1'>New Customer?<Link className="text-[#0066c0] no-underline hover:text-amber-500  hover:underline" href="/signup">Start here</Link></span>
+        </div>
       </div>
 
       <div className='navbar-section flex-col'>
