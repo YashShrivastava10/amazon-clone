@@ -1,15 +1,16 @@
 "use client";
 
-import { SignUpFormData, checkUser, signup } from '@/actions/auth'
 import { setUser } from '@/store/slice/userSlice';
 import Link from 'next/link'
 import { redirect } from 'next/navigation';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { ErrorType } from './SignInForm';
+import { ErrorType } from './SignInForm/SignInForm';
 import Image from 'next/image';
-import info from "../../../../../../public/info.png"
+import info from "@public/info.png"
 import FieldError from '../ErrorContainer/FieldError';
+import { checkUser, signup } from '@/actions/auth/auth';
+import { SignUpFormDataType } from '@/types/Form';
 
 type Field = {
   value: string;
@@ -32,7 +33,7 @@ const SignUpForm = () => {
   const validateRePassword = (password: string) => password.trim() === ""
 
   const handelSubmit = async(formData: FormData) => {
-    const { name, email, password, rePassword } = Object.fromEntries(formData.entries()) as SignUpFormData
+    const { name, email, password, rePassword } = Object.fromEntries(formData.entries()) as SignUpFormDataType
 
     const fields: Fields = {
       "#name": { value: name, validator: validateName, errorMessage: "Enter your name", type: 1 },

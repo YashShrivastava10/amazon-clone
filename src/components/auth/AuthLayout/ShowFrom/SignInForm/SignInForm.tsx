@@ -1,14 +1,14 @@
 "use client";
 
-import { checkUser, signin } from '@/actions/auth';
 import { setUser } from '@/store/slice/userSlice';
 import { redirect } from 'next/navigation';
 import React, { FormEvent, ReactElement, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import FieldError from '../ErrorContainer/FieldError';
-import Error from '../ErrorContainer/Error';
+import FieldError from '../../ErrorContainer/FieldError';
+import Error from '../../ErrorContainer/Error';
 import { useFormStatus } from 'react-dom';
 import Link from 'next/link';
+import { checkUser, signin } from '@/actions/auth/auth';
 
 export type ErrorType = {
   status: boolean,

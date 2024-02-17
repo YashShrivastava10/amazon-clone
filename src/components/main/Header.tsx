@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import React from 'react'
-import amazon from "../../public/amazon.png"
+import amazon from "@public/amazon.png"
 import { MapPin, Search, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 
@@ -60,7 +60,7 @@ const Header = () => {
           <span className="arrow"></span>
         </div>
         <div className='h-full flex items-center w-full border-3 border-transparent' id="search">
-          <input type='search' className='h-full w-full'/>
+          <input type='search' placeholder="Search Amazon.in" className='h-full w-full'/>
         </div>
         <div className='h-full 
           flex items-center gap-x-2
