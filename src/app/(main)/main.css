@@ -13,5 +13,8 @@
   @apply w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-t-[4px] border-r-transparent  border-solid border-t-[#555]
 }
 input{
-  @apply outline-none border-none
+  @apply outline-none border-none text-black pl-2
+}
+li{
+  @apply list-none
 }
