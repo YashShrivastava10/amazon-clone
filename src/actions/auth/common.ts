@@ -3,7 +3,9 @@
 import { connectDB } from "@/db"
 import { UserType } from "@/types/User";
 import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";const connection = connectDB()
+import { cookies } from "next/headers";
+
+const connection = connectDB()
 
 const secretKey = process.env.JWT_SECRET_KEY
 
@@ -22,7 +24,7 @@ export const createResponse = ({ success, message, data }: { success: boolean, m
 export const setCookie = (email: string, status: boolean = false) => {
   const maxAge = status ? 15 * 24 * 60 * 60 : 24 * 60 * 60
   const token = jwt.sign({ email }, secretKey);
-  cookies().set("authToken", token, {secure: true, httpOnly: true, maxAge});
+  cookies().set("authToken", token, {maxAge});
 }
 
 export const getSerializedUserInfo = (data: object, user: UserType) => {
